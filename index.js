@@ -3,18 +3,18 @@ const axios = require('axios')
 // const pingmydyno = require('pingmydyno');
 require('dotenv').config();
 
-const bot = new SlackBot({
-    token: `${process.env.BOT_TOKEN}`,
+const the_bot = new SlackBot({
+    token: `${process.env.Token}`,
     name: 'DevBotProject'
 })
 
 // Start Handler
-bot.on('start', () => {
+the_bot.on('start', () => {
     const params = {
         icon_emoji: ':male-technologist:'
     }
 
-    bot.postMessageToChannel(
+    the_bot.postMessageToChannel(
         'random',
         `Get inspired while working with @DevBotProject now. `,
         params
@@ -25,12 +25,12 @@ bot.on('start', () => {
 })
 
 // Error Handler
-bot.on('error', (err) => {
+the_bot.on('error', (err) => {
     console.log(err);
 })
 
 // Message Handler
-bot.on('message', (data) => {
+the_bot.on('message', (data) => {
     if (data.type !== 'message') {
         return;
     }
@@ -60,7 +60,7 @@ function inspireMe() {
                 icon_emoji: ':male-technologist:'
             }
 
-            bot.postMessageToChannel(
+            the_bot.postMessageToChannel(
                 'random',
                 `:zap: ${quote} - *${author}*`,
                 params
@@ -79,7 +79,7 @@ function randomJoke() {
                 icon_emoji: ':smile:'
             }
         
-            bot.postMessageToChannel(
+            the_bot.postMessageToChannel(
                 'random',
                 `:zap: ${joke}`,
                 params
@@ -93,7 +93,7 @@ function runHelp() {
         icon_emoji: ':question:'
     }
 
-    bot.postMessageToChannel(
+    the_bot.postMessageToChannel(
         'random',
         `Type *@inspirenuggets* with *inspire me* to get an inspiring techie quote, *random joke* to get a Chuck Norris random joke and *help* to get this instruction again`,
         params
