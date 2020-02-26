@@ -1,12 +1,11 @@
-const dotenv = require('dotenv')
-dotenv.config()
+require('dotenv').config();
 const SlackBot = require('slackbots');
 const axios = require('axios')
-// const pingmydyno = require('pingmydyno');
+
 
 
 const the_bot = new SlackBot({
-    token: `${process.env.Token}`,
+    token: `${process.env.SLACK_TOKEN}`,
     name: 'DevBotProject'
 })
 
