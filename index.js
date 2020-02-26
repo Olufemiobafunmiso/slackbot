@@ -1,6 +1,7 @@
 require('dotenv').config();
 const SlackBot = require('slackbots');
 const axios = require('axios')
+const pingmydyno = require('pingmydyno');
 
 
 
@@ -100,3 +101,25 @@ function runHelp() {
         params
     );
 }
+
+
+const http = require('http');
+const fs = require('fs');
+ 
+http.createServer(function (req, res) {
+    
+    if (req.url == '/') {
+        res.writeHead(302, { "Location": "https://" + 'slack.com' });
+        return res.end();
+    } else {
+        fs.readFile(req.url.substring(1),
+            function(err, data) { 
+                if (err) throw err;
+                res.writeHead(200);
+                res.write(data.toString('utf8'));
+                return res.end();
+        });
+    } 
+}).listen(`${process.env.PORT}`, () => {
+    pingmydyno('https://olufemi-slack-bot.herokuapp.com/');
+});
